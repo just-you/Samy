@@ -1,314 +1,530 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
-    <meta name="viewport" content="width=device-width,user-scalable=no" />
-    <meta name="format-detection" content="telephone=no">
-    <title>Samy</title>
-</head>
-<style type="text/css">
-    body {
-        text-align: center;
-        margin: 0px;
-        padding: 0px;
-        font-size: 25px;
-        color: #FFF;
-        font-family: "微软雅黑";
-        background: #e91e63;
-    }
-    
-    div {
-        text-align: left;
-    }
-    
-    .tittle {
-        width: 100%;
-        background: #e91e63;
-        top: 0px;
-        height: 100%;
-        z-index: 0;
-        position: absolute;
-        position: fixed !important;
-        display: none;
-        cursor: default;
-    }
-    
-    .big {
-        font-family: "微软雅黑";
-        color: #FFF;
-        font-size: 35px;
-    }
-    
-    .tishi {
-        position: absolute;
-        position: fixed !important;
-        z-index: 99;
-        bottom: 10px;
-        width: 100%;
-        text-align: center;
-    }
-    
-    .tishiContent {
-        border: 1px solid #FFF;
-        font-size: 18px;
-        padding: 5px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-</style>
-<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script>
-    if (localStorage["index"] == "1") {
-        window.location = "#"
-    }
-    $(document).ready(function(e) {
-        $(document).scrollTop(300);
-        timer = setInterval("$.change()", 6000);
-        t = 1;
-        $("#t-" + t).fadeIn();
-        $(document).click(function() {
-            clearInterval(timer);
-            $.change()
-        });
-        $.change = function() {
-            t++;
-            if (t <= $(".tittle").length) {
-                $(".tittle").slideUp(1500).fadeOut();
-                $("#t-" + t).slideDown(1500).fadeIn()
-            } else {
-                localStorage["index"] = "1";
-                window.location = "#"
+    <meta charset="utf-8">
+    <title>flower</title>
+    <style>
+        body {
+            font-size: 20px;
+            height: 100%;
+            width: 100%;
+            background: #000;
+            overflow: hidden;
+        }
+        
+        #bg-star {
+            top: 30%;
+            left: 30%;
+            height: 2px;
+            width: 2px;
+            position: absolute;
+            transform-style: preserve-3d;
+            box-shadow: 10em 10em yellow, 2.5em 10em white, 10em 5em yellow, 20em 0em white, 0em 20em white, 20em 20em white, 25em 20em lightyellow, 40em 35em white, 25em 40em white, 10em 50em white, 60em 0em white, 5em 0em white, 15em 40em yellow, 45em 30em white, 30em 20em lightyellow, 35em 15em white, 15em 35em yellow;
+            transform-origin: -10em 10em;
+            animation: stars 20s linear infinite;
+        }
+        
+        @keyframes stars {
+            from {
+                transform: translateZ(0em) rotate(0deg);
+            }
+            to {
+                transform: translateZ(80em) rotate(360deg);
             }
         }
-    });
-</script>
-
-<script src="http://i.51bbw.cn/Scripts/snow.js"></script>
-<style type="text/css">
-    .snow-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 100001;
-    }
-</style>
-<div class="snow-container"></div>
+        
+        #bg-star:before,
+        #bg-star:after {
+            content: "";
+            position: absolute;
+            width: inherit;
+            height: inherit;
+            background-color: white;
+            box-shadow: inherit;
+        }
+        
+        #bg-star:before {
+            transform: translateZ(-100em);
+        }
+        
+        #bg-star:after {
+            transform: translateZ(-50em);
+        }
+        
+        #flower-container {
+            transform: rotateX(30deg);
+            margin: auto;
+            height: 25em;
+            width: 25em;
+            position: absolute;
+            perspective: 50em;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+        
+        #flower-container span {
+            display: block;
+            position: absolute;
+            border-radius: 50%;
+            left: 50%;
+            background-image: linear-gradient(0deg, red 0%, white 103%);
+            transform-origin: center bottom;
+            box-shadow: 0 0 5em white;
+        }
+        
+        #flower-container div:not(:empty) {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            box-sizing: border-box;
+        }
+        
+        #flower-outer {
+            height: inherit;
+            width: inherit;
+            margin: -12.5em 0 0 -12.5em;
+            transform-style: preserve-3d;
+            transform: rotateX(30deg) rotateZ(20deg);
+            animation: outerdiv 10s linear infinite alternate;
+        }
+        
+        #flower-center {
+            height: 18em;
+            width: 18em;
+            margin: -9em 0 0 -9em;
+            transform-style: preserve-3d;
+            transform: rotateZ(22.5deg);
+        }
+        
+        #flower-inner {
+            height: 10em;
+            width: 10em;
+            margin: -5em 0 0 -5em;
+            transform-style: preserve-3d;
+            transform: rotateZ(-22.5deg);
+        }
+        
+        .flower-outer {
+            top: 0.5em;
+            height: 12em;
+            width: 5em;
+            margin-left: -1.5em;
+            opacity: 0.6;
+        }
+        
+        @keyframes outerdiv {
+            0% {
+                transform: rotateX(30deg) rotateZ(20deg);
+            }
+            100% {
+                transform: rotateX(30deg) rotateZ(380deg);
+            }
+        }
+        
+        .flower-center {
+            height: 9em;
+            width: 4em;
+            margin-left: -1em;
+            opacity: 0.8;
+        }
+        
+        .flower-inner {
+            height: 5em;
+            width: 2.5em;
+            margin-left: -0.75em;
+            opacity: 0.9;
+        }
+        
+        .outer1 {
+            transform: rotateZ(0deg) rotateX(-15deg);
+            animation: flowerouter1 2s ease-in-out 1s backwards;
+        }
+        
+        .center1 {
+            transform: rotateZ(0deg) rotateX(-30deg);
+            animation: flowercenter1 3s ease-in-out 2s backwards;
+        }
+        
+        .inner1 {
+            transform: rotateZ(0deg) rotateX(-60deg);
+            animation: flowerinner1 4s ease-in-out 3s backwards;
+        }
+        
+        .outer2 {
+            transform: rotateZ(45deg) rotateX(-15deg);
+            animation: flowerouter2 2s ease-in-out 1s backwards;
+        }
+        
+        .center2 {
+            transform: rotateZ(45deg) rotateX(-30deg);
+            animation: flowercenter2 3s ease-in-out 2s backwards;
+        }
+        
+        .inner2 {
+            transform: rotateZ(45deg) rotateX(-60deg);
+            animation: flowerinner2 4s ease-in-out 3s backwards;
+        }
+        
+        .outer3 {
+            transform: rotateZ(90deg) rotateX(-15deg);
+            animation: flowerouter3 2s ease-in-out 1s backwards;
+        }
+        
+        .center3 {
+            transform: rotateZ(90deg) rotateX(-30deg);
+            animation: flowercenter3 3s ease-in-out 2s backwards;
+        }
+        
+        .inner3 {
+            transform: rotateZ(90deg) rotateX(-60deg);
+            animation: flowerinner3 4s ease-in-out 3s backwards;
+        }
+        
+        .outer4 {
+            transform: rotateZ(135deg) rotateX(-15deg);
+            animation: flowerouter4 2s ease-in-out 1s backwards;
+        }
+        
+        .center4 {
+            transform: rotateZ(135deg) rotateX(-30deg);
+            animation: flowercenter4 3s ease-in-out 2s backwards;
+        }
+        
+        .inner4 {
+            transform: rotateZ(135deg) rotateX(-60deg);
+            animation: flowerinner4 4s ease-in-out 3s backwards;
+        }
+        
+        .outer5 {
+            transform: rotateZ(180deg) rotateX(-15deg);
+            animation: flowerouter5 2s ease-in-out 1s backwards;
+        }
+        
+        .center5 {
+            transform: rotateZ(180deg) rotateX(-30deg);
+            animation: flowercenter5 3s ease-in-out 2s backwards;
+        }
+        
+        .inner5 {
+            transform: rotateZ(180deg) rotateX(-60deg);
+            animation: flowerinner5 4s ease-in-out 3s backwards;
+        }
+        
+        .outer6 {
+            transform: rotateZ(225deg) rotateX(-15deg);
+            animation: flowerouter6 2s ease-in-out 1s backwards;
+        }
+        
+        .center6 {
+            transform: rotateZ(225deg) rotateX(-30deg);
+            animation: flowercenter6 3s ease-in-out 2s backwards;
+        }
+        
+        .inner6 {
+            transform: rotateZ(225deg) rotateX(-60deg);
+            animation: flowerinner6 4s ease-in-out 3s backwards;
+        }
+        
+        .outer7 {
+            transform: rotateZ(270deg) rotateX(-15deg);
+            animation: flowerouter7 2s ease-in-out 1s backwards;
+        }
+        
+        .center7 {
+            transform: rotateZ(270deg) rotateX(-30deg);
+            animation: flowercenter7 3s ease-in-out 2s backwards;
+        }
+        
+        .inner7 {
+            transform: rotateZ(270deg) rotateX(-60deg);
+            animation: flowerinner7 4s ease-in-out 3s backwards;
+        }
+        
+        .outer8 {
+            transform: rotateZ(315deg) rotateX(-15deg);
+            animation: flowerouter8 2s ease-in-out 1s backwards;
+        }
+        
+        .center8 {
+            transform: rotateZ(315deg) rotateX(-30deg);
+            animation: flowercenter8 3s ease-in-out 2s backwards;
+        }
+        
+        .inner8 {
+            transform: rotateZ(315deg) rotateX(-60deg);
+            animation: flowerinner8 4s ease-in-out 3s backwards;
+        }
+        
+        @keyframes flowerouter1 {
+            from {
+                transform: rotateZ(0deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(0deg) rotateX(-15deg);
+            }
+        }
+        
+        @keyframes flowerouter2 {
+            from {
+                transform: rotateZ(45deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(45deg) rotateX(-15deg);
+            }
+        }
+        
+        @keyframes flowerouter3 {
+            from {
+                transform: rotateZ(90deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(90deg) rotateX(-15);
+            }
+        }
+        
+        @keyframes flowerouter4 {
+            from {
+                transform: rotateZ(135deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(135deg) rotateX(-15deg);
+            }
+        }
+        
+        @keyframes flowerouter5 {
+            from {
+                transform: rotateZ(180deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(180) rotateX(-15deg);
+            }
+        }
+        
+        @keyframes flowerouter6 {
+            from {
+                transform: rotateZ(225deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(225deg) rotateX(-15deg);
+            }
+        }
+        
+        @keyframes flowerouter7 {
+            from {
+                transform: rotateZ(270deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(270deg) rotateX(-15deg);
+            }
+        }
+        
+        @keyframes flowerouter8 {
+            from {
+                transform: rotateZ(315deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(315deg) rotateX(-15deg);
+            }
+        }
+        
+        @keyframes flowercenter1 {
+            from {
+                transform: rotateZ(0deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(0deg) rotateX(-30deg);
+            }
+        }
+        
+        @keyframes flowercenter2 {
+            from {
+                transform: rotateZ(45deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(45deg) rotateX(-30deg);
+            }
+        }
+        
+        @keyframes flowercenter3 {
+            from {
+                transform: rotateZ(90deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(90deg) rotateX(-30deg);
+            }
+        }
+        
+        @keyframes flowercenter4 {
+            from {
+                transform: rotateZ(135deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(135deg) rotateX(-30deg);
+            }
+        }
+        
+        @keyframes flowercenter5 {
+            from {
+                transform: rotateZ(180deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(180deg) rotateX(-30deg);
+            }
+        }
+        
+        @keyframes flowercenter6 {
+            from {
+                transform: rotateZ(225deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(225deg) rotateX(-30deg);
+            }
+        }
+        
+        @keyframes flowercenter7 {
+            from {
+                transform: rotateZ(270deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(270deg) rotateX(-30deg);
+            }
+        }
+        
+        @keyframes flowercenter8 {
+            from {
+                transform: rotateZ(315deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(315deg) rotateX(-30deg);
+            }
+        }
+        
+        @keyframes flowerinner1 {
+            from {
+                transform: rotateZ(0deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(0deg) rotateX(-60deg);
+            }
+        }
+        
+        @keyframes flowerinner2 {
+            from {
+                transform: rotateZ(45deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(45deg) rotateX(-60deg);
+            }
+        }
+        
+        @keyframes flowerinner3 {
+            from {
+                transform: rotateZ(90deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(90deg) rotateX(-60deg);
+            }
+        }
+        
+        @keyframes flowerinner4 {
+            from {
+                transform: rotateZ(135deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(135deg) rotateX(-60deg);
+            }
+        }
+        
+        @keyframes flowerinner5 {
+            from {
+                transform: rotateZ(180deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(180deg) rotateX(-60deg);
+            }
+        }
+        
+        @keyframes flowerinner6 {
+            from {
+                transform: rotateZ(225deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(225deg) rotateX(-60deg);
+            }
+        }
+        
+        @keyframes flowerinner7 {
+            from {
+                transform: rotateZ(270deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(270deg) rotateX(-60deg);
+            }
+        }
+        
+        @keyframes flowerinner8 {
+            from {
+                transform: rotateZ(315deg) rotateX(-90deg);
+            }
+            to {
+                transform: rotateZ(315deg) rotateX(-60deg);
+            }
+        }
+        
+        .text {
+            display: none;
+            color: white;
+            width: 40em;
+            line-height: 2em;
+            margin: 0 auto;
+            box-sizing: border-box;
+            padding-bottom: 10em;
+        }
+        
+        .text:first-line {
+            text-indent: 2em;
+        }
+    </style>
+</head>
 
 <body>
-    <center>
-        <div class="tittle" id="t-1">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">Hey,我真的好想你</td>
-                </tr>
-            </table>
+    <div id="flower-container">
+        <div id="bg-star"></div>
+        <div id="flower-outer">
+            <span class="flower-outer outer1"></span>
+            <span class="flower-outer outer2"></span>
+            <span class="flower-outer outer3"></span>
+            <span class="flower-outer outer4"></span>
+            <span class="flower-outer outer5"></span>
+            <span class="flower-outer outer6"></span>
+            <span class="flower-outer outer7"></span>
+            <span class="flower-outer outer8"></span>
+            <div id="flower-center">
+                <span class="flower-center center1"></span>
+                <span class="flower-center center2"></span>
+                <span class="flower-center center3"></span>
+                <span class="flower-center center4"></span>
+                <span class="flower-center center5"></span>
+                <span class="flower-center center6"></span>
+                <span class="flower-center center7"></span>
+                <span class="flower-center center8"></span>
+                <div id="flower-inner">
+                    <span class="flower-inner inner1"></span>
+                    <span class="flower-inner inner2"></span>
+                    <span class="flower-inner inner3"></span>
+                    <span class="flower-inner inner4"></span>
+                    <span class="flower-inner inner5"></span>
+                    <span class="flower-inner inner6"></span>
+                    <span class="flower-inner inner7"></span>
+                    <span class="flower-inner inner8"></span>
+                </div>
+            </div>
         </div>
-        <div class="tittle" id="t-2">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">世界精彩亦纷扰，你在，就很好</td>
-                </tr>
-            </table>
-        </div>
-        <div class="tittle" id="t-3">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">人生漫漫亦匆匆，你来，便很好</td>
-                </tr>
-            </table>
-        </div>
-        <div class="tittle" id="t-4">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">小可爱，无论过去你独自经历了什么</td>
-                </tr>
-            </table>
-        </div>
-        <div class="tittle" id="t-5">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">我都是很心疼很心疼你</td>
-                </tr>
-            </table>
-        </div>
-        <div class="tittle" id="t-6">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">你的身上我总能看到自己的影子</td>
-                </tr>
-            </table>
-        </div>
-        <div class="tittle" id="t-7">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">以后，春夏秋冬，我在，一直在</td>
-                </tr>
-            </table>
-        </div>
-        <div class="tittle" id="t-8">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">你在我眼里是宛如天使般的存在</td>
-                </tr>
-            </table>
-        </div>
-        <div class="tittle" id="t-9">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">我愿用余生好好珍藏、守护你</td>
-                </tr>
-            </table>
-        </div>
-        <div class="tittle" id="t-10">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">誓言，总是需要付出与行动的</td>
-                </tr>
-            </table>
-        </div>
-        <div class="tittle" id="t-11">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">是需要归于平淡安静的生活里</td>
-                </tr>
-            </table>
-        </div>
-        <div class="tittle" id="t-12">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">总是需要无声的陪伴与呵护的</td>
-                </tr>
-            </table>
-        </div>
-        <div class="tittle" id="t-13">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">这条路无论多么磨难</td>
-                </tr>
-            </table>
-        </div>
-        <div class="tittle" id="t-14">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">我都有信心和能力愿意陪你走下去</td>
-                </tr>
-            </table>
-        </div>
-        <div class="tittle" id="t-15">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">给我一些信心，请也给自己一些信心</td>
-                </tr>
-            </table>
-        </div>
-        <div class="tittle" id="t-16">
-            <table width="100%" border="0" height="100%">
-                <tr>
-                    <td align="center">You Are My Sunshine</td>
-                </tr>
-            </table>
-        </div>
-    </center>
-    <div align="center" class="tishi">
-        <span class="tishiContent">轻触屏幕继续</span>
-        <br/>
-        <span style="font-size: 10px;">周凡 & 婉茹</span>
-        <br/>
-
-
     </div>
 
-
-
-    <link rel="stylesheet" href="http://i.51bbw.cn/mp3/css/cuplayer.css">
-    <div style="position:absolute; top:150px; right:50px;z-index: 9999999;">
-        <audio id="main_audio" autoplay="autoplay" preload="auto" loop>
-            <source src="https://ai.bbai520.com/music/music01.mp3" >
-        </audio>
-        <a class="c-white fs-12 icon-play rotate" id="btn-play" href="javascript:void(0);"></a>
-    </div>
-
-    <script type="text/javascript">
-        //获取picid函数
-        $(function() {
-            $("area").click(function() {
-                var picId = $(this).attr("data-id");
-                var picSrc = "images/img_big/" + picId + ".jpg"
-                $(".modal-content>.pic-box>img").attr("src", picSrc);
-            })
-            var isPlaying = function(audio) {
-                return !audio.paused;
-            }
-            var a = document.getElementById('main_audio');
-            $('#btn-play').on('click', function() {
-                if ($(this).hasClass('rotate')) {
-                    a.pause();
-                    $(this).removeClass('rotate');
-                } else {
-                    a.play();
-                    $(this).addClass('rotate');
-                }
-            });
-
-        })
-    </script>
-
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script>
-        function autoPlayAudio1() {
-            wx.config({
-                // 配置信息, 即使不正确也能使用 wx.ready
-                debug: false,
-                appId: '',
-                timestamp: 1,
-                nonceStr: '',
-                signature: '',
-                jsApiList: []
-            });
-            wx.ready(function() {
-                document.getElementById('main_audio').play();
-            });
-        }
-        autoPlayAudio1(); // 推荐使用方法1
-    </script>
 </body>
 
 </html>
-<div style="display:none">
-    <script type="text/javascript">
-        /*677*250 创建于 Sun Oct 09 2016*/
-        var cpro_id = "u2782229";
-    </script>
-    <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
-</div>
-<script>
-    (function() {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?409ccbe4694e0213c11f33f5b461a258";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
-<!-- Dynamic page generated in 0.540 seconds. -->
-<!-- Cached page generated by WP-Super-Cache on 2017-07-09 16:58:45 -->
-
-<!-- super cache -->
